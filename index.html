@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dorothy — Wellness & Coaching · Dubai</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#FAF7F2;--white:#FFFFFF;--blush:#F5EDE3;
+  --rose:#C4967A;--rose-d:#9E6E52;--rose-l:#E8C5AD;
+  --sage:#8A9E8C;--sage-l:#C5D4C6;
+  --text:#2C2420;--muted:#9A8880;--light:#D4C4BA;
+  --border:rgba(196,150,122,0.2);--border-s:rgba(196,150,122,0.4);
+  --green:#25D366;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ivory);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+/* SUBTLE TEXTURE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+
+/* TOP LINE */
+body::after{content:'';position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--rose),var(--sage),transparent);z-index:200;opacity:.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(250,247,242,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--text);letter-spacing:.04em}
+.nav-logo span{color:var(--rose);font-style:italic}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-wrap{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);color:var(--text);font-family:'Jost',sans-serif;font-size:12px;font-weight:300;padding:7px 12px;cursor:pointer;transition:all .2s;letter-spacing:.04em}
+.lang-btn:hover{border-color:var(--rose-d);color:var(--rose)}
+.lang-btn .flag{font-size:14px}
+.lang-btn .chev{font-size:8px;opacity:.5;transition:transform .2s}
+.lang-btn.open .chev{transform:rotate(180deg)}
+.lang-dd{position:absolute;top:calc(100% + 6px);right:0;background:var(--white);border:1px solid var(--border);min-width:160px;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .2s;z-index:300;box-shadow:0 8px 32px rgba(196,150,122,0.12)}
+.lang-dd.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.lang-opt{display:flex;align-items:center;gap:9px;padding:10px 14px;cursor:pointer;font-size:13px;transition:background .15s;color:var(--text);font-family:'Jost',sans-serif;font-weight:300}
+.lang-opt:hover{background:var(--blush);color:var(--rose)}
+.lang-opt.active{color:var(--rose)}
+.nav-cta{background:var(--rose);color:var(--white);font-family:'Jost',sans-serif;font-weight:500;font-size:12px;padding:9px 20px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .2s;cursor:pointer;border:none;white-space:nowrap}
+.nav-cta:hover{background:var(--rose-d);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:130px 48px 80px;max-width:960px;margin:0 auto;position:relative}
+.hero-eye{display:flex;align-items:center;gap:14px;margin-bottom:40px;animation:fadeUp .8s ease both}
+.eye-line{width:28px;height:1px;background:var(--rose);opacity:.7}
+.eye-txt{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);font-weight:400}
+h1{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,88px);font-weight:400;line-height:.97;letter-spacing:-.01em;margin-bottom:32px;animation:fadeUp .8s ease .1s both;color:var(--text)}
+h1 em{font-style:italic;color:var(--rose)}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:480px;margin-bottom:48px;animation:fadeUp .8s ease .2s both;line-height:1.8;font-weight:300}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .8s ease .3s both}
+.btn-rose{background:var(--rose);color:var(--white);font-family:'Jost',sans-serif;font-weight:500;font-size:12px;padding:15px 32px;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s;display:inline-block;text-decoration:none}
+.btn-rose:hover{background:var(--rose-d);transform:translateY(-2px)}
+.btn-out{border:1px solid var(--border-s);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;font-size:12px;padding:15px 32px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .25s;display:inline-block;cursor:pointer;background:none}
+.btn-out:hover{border-color:var(--rose);color:var(--rose)}
+.hero-stats{display:flex;gap:0;margin-top:64px;padding-top:40px;border-top:1px solid var(--border);animation:fadeUp .8s ease .4s both;flex-wrap:wrap}
+.stat{flex:1;min-width:110px;padding:0 28px 0 0;border-right:1px solid var(--border)}
+.stat:first-child{padding-left:0}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:var(--rose);line-height:1;letter-spacing:-.01em}
+.stat-l{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* DIVIDER */
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 48px}
+
+/* SECTIONS */
+section{max-width:960px;margin:0 auto;padding:90px 48px}
+.sec-eye{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-eye-line{width:20px;height:1px;background:var(--rose);opacity:.6}
+.sec-eye-txt{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:400;line-height:1.08;letter-spacing:-.01em;margin-bottom:20px;color:var(--text)}
+h2 em{font-style:italic;color:var(--rose)}
+.sec-body{color:var(--muted);font-size:15px;max-width:520px;margin-bottom:52px;line-height:1.85}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px}
+.about-img{background:linear-gradient(135deg,var(--blush),var(--sage-l));aspect-ratio:3/4;position:relative;overflow:hidden}
+.about-img::before{content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:80px;color:rgba(196,150,122,0.15)}
+.about-img-label{position:absolute;bottom:24px;left:24px;background:var(--white);padding:12px 18px;font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:var(--rose)}
+.about-text{display:flex;flex-direction:column;gap:20px}
+.about-text p{color:var(--muted);font-size:15px;line-height:1.85}
+.about-quote{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--rose);line-height:1.5;padding-left:20px;border-left:2px solid var(--rose-l)}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:48px}
+.svc-item{background:var(--white);padding:36px 28px;border-top:2px solid transparent;transition:all .3s;cursor:default}
+.svc-item:hover{border-top-color:var(--rose);transform:translateY(-3px);box-shadow:0 8px 32px rgba(196,150,122,0.1)}
+.svc-icon{font-size:28px;margin-bottom:18px;opacity:.8}
+.svc-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:10px;color:var(--text)}
+.svc-desc{color:var(--muted);font-size:13px;line-height:1.7}
+.svc-tag{display:inline-block;margin-top:14px;font-size:10px;padding:4px 12px;border:1px solid var(--border);color:var(--rose);letter-spacing:.08em;text-transform:uppercase}
+
+/* THURSDAY EVENTS */
+.events-wrap{margin-top:48px}
+.event-badge{display:inline-flex;align-items:center;gap:10px;background:var(--blush);padding:10px 20px;margin-bottom:32px;border-left:3px solid var(--rose)}
+.event-badge-icon{font-size:16px}
+.event-badge-txt{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);font-weight:500}
+.events-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.event-card{background:var(--white);padding:32px 28px;position:relative;overflow:hidden;transition:all .3s}
+.event-card:hover{background:var(--blush)}
+.event-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--rose),var(--sage));opacity:0;transition:opacity .3s}
+.event-card:hover::after{opacity:1}
+.event-day{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:10px;font-weight:500}
+.event-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:8px;color:var(--text)}
+.event-desc{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:16px}
+.event-meta{display:flex;gap:16px;flex-wrap:wrap}
+.event-meta span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;letter-spacing:.04em}
+.event-price{display:inline-block;margin-top:16px;font-family:'Playfair Display',serif;font-size:18px;color:var(--rose)}
+.event-btn{display:block;text-align:center;margin-top:16px;padding:11px;border:1px solid var(--border-s);font-family:'Jost',sans-serif;font-weight:500;font-size:11px;color:var(--rose);letter-spacing:.1em;text-transform:uppercase;transition:all .2s;cursor:pointer;background:none;text-decoration:none;width:100%}
+.event-btn:hover{background:var(--rose);color:var(--white);border-color:var(--rose)}
+
+/* ZANZIBAR RETREAT */
+.retreat-wrap{background:linear-gradient(135deg,#2C2420,#3D2E28);padding:60px;position:relative;overflow:hidden;margin-top:48px}
+.retreat-wrap::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='500' cy='50' r='200' fill='rgba(196,150,122,0.06)'/%3E%3Ccircle cx='100' cy='350' r='150' fill='rgba(138,158,140,0.05)'/%3E%3C/svg%3E");pointer-events:none}
+.retreat-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative}
+.retreat-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(196,150,122,0.3);padding:7px 16px;margin-bottom:20px}
+.retreat-badge-txt{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose-l);font-weight:400}
+.retreat-wrap h3{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,44px);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:16px}
+.retreat-wrap h3 em{font-style:italic;color:var(--rose-l)}
+.retreat-sub{color:rgba(240,232,216,0.65);font-size:15px;line-height:1.8;margin-bottom:28px}
+.retreat-details{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.retreat-detail{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(240,232,216,0.8)}
+.retreat-detail-icon{font-size:16px;flex-shrink:0;opacity:.8}
+.retreat-price{margin-bottom:28px}
+.retreat-price-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-l);opacity:.7;margin-bottom:4px}
+.retreat-price-amt{font-family:'Playfair Display',serif;font-size:42px;font-weight:400;color:var(--white);line-height:1}
+.retreat-price-note{font-size:12px;color:rgba(240,232,216,0.5);margin-top:4px;letter-spacing:.04em}
+.retreat-btn{display:inline-block;background:var(--rose);color:var(--white);font-family:'Jost',sans-serif;font-weight:500;font-size:12px;padding:15px 32px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.retreat-btn:hover{background:var(--rose-l);color:var(--text)}
+.retreat-right{display:flex;flex-direction:column;gap:2px}
+.retreat-feat{background:rgba(255,255,255,0.05);padding:18px 20px;border-left:2px solid rgba(196,150,122,0.3);transition:all .2s}
+.retreat-feat:hover{background:rgba(255,255,255,0.08);border-left-color:var(--rose-l)}
+.retreat-feat-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--white);margin-bottom:4px;font-weight:400}
+.retreat-feat-desc{font-size:12px;color:rgba(240,232,216,0.55);line-height:1.6}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+.testi-item{background:var(--white);padding:32px 24px}
+.testi-stars{color:var(--rose);font-size:12px;letter-spacing:2px;margin-bottom:14px}
+.testi-text{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:16px}
+.testi-name{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+/* BOOKING FORM */
+#book-sec{display:none;margin-top:64px}
+#book-sec.open{display:block;animation:fadeUp .5s ease both}
+.bform-wrap{background:var(--white);border:1px solid var(--border);box-shadow:0 8px 48px rgba(196,150,122,0.08)}
+.bform-head{padding:28px 36px 22px;border-bottom:1px solid var(--border);background:var(--blush)}
+.bform-head h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:6px;color:var(--text)}
+.bform-head p{color:var(--muted);font-size:13px}
+.bform-pkg{margin-top:6px;font-size:12px;color:var(--rose);font-style:italic}
+.bform-body{padding:28px 36px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.bg{display:flex;flex-direction:column;gap:5px}
+.bg.full{grid-column:1/-1}
+.bg label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--rose-d)}
+.bg select,.bg input,.bg textarea{background:var(--ivory);border:1px solid var(--border);color:var(--text);font-family:'Jost',sans-serif;font-size:13px;font-weight:300;padding:11px 13px;outline:none;transition:border .2s;-webkit-appearance:none;appearance:none;width:100%;border-radius:0}
+.bg select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C4967A' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.bg select option{background:var(--white)}
+.bg select:focus,.bg input:focus,.bg textarea:focus{border-color:var(--rose)}
+.bg textarea{resize:vertical;min-height:80px}
+::placeholder{color:#C4B8B0}
+.bform-foot{padding:20px 36px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--blush)}
+.bform-note{font-size:12px;color:var(--muted);max-width:360px;line-height:1.5}
+.bform-sub{background:var(--rose);color:var(--white);font-family:'Jost',sans-serif;font-weight:500;font-size:12px;padding:14px 32px;border:none;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+.bform-sub:hover{background:var(--rose-d)}
+#bform-success{display:none;padding:48px 36px;text-align:center;background:var(--blush)}
+#bform-success.show{display:block;animation:fadeUp .5s both}
+.bs-icon{font-size:36px;margin-bottom:14px}
+#bform-success h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;margin-bottom:8px}
+#bform-success p{color:var(--muted);font-size:14px;max-width:360px;margin:0 auto 22px}
+
+/* CONTACT */
+.contact-sec{padding:90px 48px;max-width:960px;margin:0 auto}
+.ct-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.ct-left{display:flex;flex-direction:column;gap:18px}
+.ct-left h2{margin-bottom:0}
+.ct-left p{color:var(--muted);font-size:14px;max-width:340px;line-height:1.85}
+.ct-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.wa-btn{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;padding:13px 24px;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.wa-btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.em-btn{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--text);font-family:'Jost',sans-serif;font-weight:300;font-size:12px;padding:13px 24px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border);transition:all .2s}
+.em-btn:hover{border-color:var(--rose);color:var(--rose)}
+.ct-right{background:var(--white);border:1px solid var(--border);padding:28px;box-shadow:0 4px 24px rgba(196,150,122,0.07)}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.cf-g{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.cf-g label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--rose-d)}
+.cf-g input,.cf-g textarea{background:var(--ivory);border:1px solid var(--border);color:var(--text);font-family:'Jost',sans-serif;font-size:13px;font-weight:300;padding:11px 13px;outline:none;transition:border .2s;width:100%;resize:vertical;border-radius:0}
+.cf-g input:focus,.cf-g textarea:focus{border-color:var(--rose)}
+.cf-btns{display:flex;gap:8px;margin-top:14px}
+.cf-wa{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--green);color:#fff;font-family:'Jost',sans-serif;font-weight:500;font-size:11px;padding:12px 8px;border:none;cursor:pointer;letter-spacing:.07em;text-transform:uppercase;transition:all .2s}
+.cf-em{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--rose);color:var(--white);font-family:'Jost',sans-serif;font-weight:500;font-size:11px;padding:12px 8px;border:none;cursor:pointer;letter-spacing:.07em;text-transform:uppercase;transition:all .2s}
+.cf-wa:hover{filter:brightness(1.1)}
+.cf-em:hover{background:var(--rose-d)}
+#cf-succ{display:none;text-align:center;padding:20px 0}
+#cf-succ.show{display:block;animation:fadeUp .4s both}
+
+footer{text-align:center;padding:28px;color:var(--light);font-size:11px;border-top:1px solid var(--border);letter-spacing:.06em;background:var(--white)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RTL */
+[dir="rtl"] .retreat-feat{border-left:none;border-right:2px solid rgba(196,150,122,0.3)}
+[dir="rtl"] .retreat-feat:hover{border-right-color:var(--rose-l)}
+[dir="rtl"] .about-quote{padding-left:0;border-left:none;padding-right:20px;border-right:2px solid var(--rose-l)}
+[dir="rtl"] .event-card::after{background:linear-gradient(270deg,var(--rose),var(--sage))}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .nav-cta{font-size:11px;padding:8px 14px;white-space:nowrap}
+  .hero{padding:110px 20px 60px}
+  section{padding:64px 20px}
+  .contact-sec{padding:64px 20px}
+  .div{margin:0 20px}
+  h1{font-size:clamp(36px,10vw,60px)}
+  .hero-stats{gap:0}
+  .stat{min-width:50%;padding:14px 12px;border-right:none;border-bottom:1px solid var(--border)}
+  .stat:nth-child(odd){border-right:1px solid var(--border)}
+  .about-grid{grid-template-columns:1fr}
+  .about-img{aspect-ratio:16/9}
+  .services-grid{grid-template-columns:1fr}
+  .events-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .retreat-wrap{padding:36px 24px}
+  .retreat-inner{grid-template-columns:1fr}
+  .bform-body{grid-template-columns:1fr;padding:20px}
+  .bform-head,.bform-foot{padding:20px}
+  .bform-foot{flex-direction:column;align-items:stretch}
+  .bform-sub{text-align:center}
+  .ct-inner{grid-template-columns:1fr;gap:36px}
+  .cf-row{grid-template-columns:1fr}
+  .cf-btns{flex-direction:column}
+  .ct-btns{flex-direction:column}
+  .hero-actions{flex-direction:column}
+  .btn-rose,.btn-out{text-align:center;width:100%}
+}
+@media(max-width:480px){
+  h1{font-size:34px}
+  .stat{min-width:100%;border-right:none}
+  .nav-cta{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dorothy<span>.</span></div>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-btn" onclick="toggleLang()" id="lang-btn">
+        <span class="flag" id="cur-flag">🇬🇧</span>
+        <span id="cur-lang">EN</span>
+        <span class="chev">▼</span>
+      </button>
+      <div class="lang-dd" id="lang-dd">
+        <div class="lang-opt active" onclick="setLang('en')"><span class="flag">🇬🇧</span> English</div>
+        <div class="lang-opt" onclick="setLang('hu')"><span class="flag">🇭🇺</span> Magyar</div>
+        <div class="lang-opt" onclick="setLang('de')"><span class="flag">🇩🇪</span> Deutsch</div>
+        <div class="lang-opt" onclick="setLang('fr')"><span class="flag">🇫🇷</span> Français</div>
+        <div class="lang-opt" onclick="setLang('it')"><span class="flag">🇮🇹</span> Italiano</div>
+        <div class="lang-opt" onclick="setLang('ru')"><span class="flag">🇷🇺</span> Русский</div>
+        <div class="lang-opt" onclick="setLang('ar')"><span class="flag">🇦🇪</span> العربية</div>
+        <div class="lang-opt" onclick="setLang('zh')"><span class="flag">🇨🇳</span> 中文</div>
+      </div>
+    </div>
+    <a href="#book" class="nav-cta" id="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye"><div class="eye-line"></div><div class="eye-txt" id="hero-eye">Wellness · Coaching · Dubai</div></div>
+  <h1 id="hero-h1">Live well.<br>Feel <em>whole.</em><br>Begin today.</h1>
+  <p class="hero-sub" id="hero-sub">A sanctuary for women who are ready to transform their health, mindset and energy. Weekly gatherings in Dubai and a life-changing retreat in Zanzibar.</p>
+  <div class="hero-actions">
+    <button class="btn-rose" onclick="openBook('Zanzibar Retreat')" id="btn-zanzibar">Reserve Zanzibar Retreat</button>
+    <a href="#events" class="btn-out" id="btn-events">See Thursday Events</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n" id="s1">200+</div><div class="stat-l" id="sl1">Women transformed</div></div>
+    <div class="stat"><div class="stat-n" id="s2">Every Thu</div><div class="stat-l" id="sl2">Live events in Dubai</div></div>
+    <div class="stat"><div class="stat-n" id="s3">Zanzibar</div><div class="stat-l" id="sl3">Retreat destination</div></div>
+    <div class="stat"><div class="stat-n" id="s4">8</div><div class="stat-l" id="sl4">Languages</div></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ABOUT -->
+<section>
+  <div class="sec-eye reveal"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="ab-eye">About Dorothy</div></div>
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <div class="about-img-label" id="ab-img-label">Wellness Coach · Dubai</div>
+    </div>
+    <div class="about-text reveal">
+      <h2 id="ab-h2">Wellness is not a<br>destination.<br>It's a <em>daily practice.</em></h2>
+      <div class="about-quote" id="ab-quote">"I believe every woman deserves to feel vibrant, clear and deeply at home in her own body."</div>
+      <p id="ab-p1">Dorothy is a certified wellness and mindset coach based in Dubai. With over a decade of experience guiding women through transformation, she combines evidence-based coaching with holistic wellness practices.</p>
+      <p id="ab-p2">Her work spans personal coaching sessions, weekly group events every Thursday in Dubai, and immersive retreat experiences — including her signature Zanzibar Wellness Retreat.</p>
+      <button class="btn-rose" onclick="openBook('Coaching Session')" id="ab-cta">Book a Session</button>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- SERVICES -->
+<section>
+  <div class="sec-eye reveal"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="sv-eye">What I Offer</div></div>
+  <h2 class="reveal" id="sv-h2">Three ways to<br><em>begin your journey.</em></h2>
+  <div class="services-grid">
+    <div class="svc-item reveal">
+      <div class="svc-icon">🌿</div>
+      <div class="svc-name" id="sv1n">1:1 Wellness Coaching</div>
+      <div class="svc-desc" id="sv1d">Personalised sessions focused on your health, energy and mindset goals. We design a plan that fits your life in Dubai and beyond.</div>
+      <div class="svc-tag" id="sv1t">Private · Online or In-person</div>
+    </div>
+    <div class="svc-item reveal">
+      <div class="svc-icon">🕯️</div>
+      <div class="svc-name" id="sv2n">Thursday Group Events</div>
+      <div class="svc-desc" id="sv2d">Weekly gatherings for women in Dubai — movement, breathwork, connection and community. Every Thursday. Each session is different.</div>
+      <div class="svc-tag" id="sv2t">Weekly · Dubai</div>
+    </div>
+    <div class="svc-item reveal">
+      <div class="svc-icon">🌊</div>
+      <div class="svc-name" id="sv3n">Zanzibar Wellness Retreat</div>
+      <div class="svc-desc" id="sv3d">An immersive multi-day retreat on the coast of Zanzibar. Yoga, coaching, ocean therapy, nourishing food and deep transformation.</div>
+      <div class="svc-tag" id="sv3t">Retreat · Zanzibar</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- THURSDAY EVENTS -->
+<section id="events">
+  <div class="sec-eye reveal"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="ev-eye">Thursday Events</div></div>
+  <h2 class="reveal" id="ev-h2">Every Thursday.<br><em>A new experience.</em></h2>
+  <p class="sec-body reveal" id="ev-body">Each week brings a different theme — movement, breathwork, sound healing, mindset or community. Buy a single pass or a monthly bundle.</p>
+
+  <div class="events-wrap">
+    <div class="event-badge">
+      <div class="event-badge-icon">📅</div>
+      <div class="event-badge-txt" id="ev-badge">Every Thursday · Dubai · Limited Spaces</div>
+    </div>
+    <div class="events-grid">
+      <div class="event-card reveal">
+        <div class="event-day" id="ev1-day">This Thursday</div>
+        <div class="event-name" id="ev1-name">Morning Breathwork & Reset</div>
+        <div class="event-desc" id="ev1-desc">Start your day with conscious breathing, gentle movement and a guided meditation to reset your nervous system and set a powerful intention for the week.</div>
+        <div class="event-meta">
+          <span id="ev1-time">🕖 7:00 AM – 8:30 AM</span>
+          <span id="ev1-loc">📍 Dubai (location on booking)</span>
+        </div>
+        <div class="event-price" id="ev1-price">AED 150 / session</div>
+        <a href="#book" class="event-btn" onclick="openBook('Thursday Breathwork')" id="ev1-btn">Reserve My Spot →</a>
+      </div>
+      <div class="event-card reveal">
+        <div class="event-day" id="ev2-day">Monthly Bundle</div>
+        <div class="event-name" id="ev2-name">Thursday Pass — 4 Sessions</div>
+        <div class="event-desc" id="ev2-desc">Join every Thursday for a month. Each session has a different focus — breathwork, yoga, sound healing, coaching circle or movement. The best way to build a consistent practice.</div>
+        <div class="event-meta">
+          <span id="ev2-time">🗓️ 4 Thursdays / month</span>
+          <span id="ev2-loc">📍 Dubai · Rotating venues</span>
+        </div>
+        <div class="event-price" id="ev2-price">AED 500 / month</div>
+        <a href="#book" class="event-btn" onclick="openBook('Thursday Monthly Pass')" id="ev2-btn">Get Monthly Pass →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ZANZIBAR RETREAT -->
+<section id="zanzibar">
+  <div class="sec-eye reveal"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="zn-eye">Zanzibar Retreat</div></div>
+  <h2 class="reveal" id="zn-h2">Seven days.<br><em>One island.</em><br>Total transformation.</h2>
+  <div class="retreat-wrap reveal">
+    <div class="retreat-inner">
+      <div>
+        <div class="retreat-badge"><div class="retreat-badge-txt" id="zn-badge">🌴 Zanzibar · Limited to 12 Women</div></div>
+        <h3 id="zn-title">The Zanzibar<br><em>Wellness Retreat</em></h3>
+        <p class="retreat-sub" id="zn-sub">Seven days on the coast of Zanzibar — yoga at sunrise, coaching circles, ocean therapy, nourishing meals and the space to finally put yourself first.</p>
+        <div class="retreat-details">
+          <div class="retreat-detail"><div class="retreat-detail-icon">📅</div><span id="zn-d1">Date: Coming soon — register your interest now</span></div>
+          <div class="retreat-detail"><div class="retreat-detail-icon">👩</div><span id="zn-d2">For women ready for deep change</span></div>
+          <div class="retreat-detail"><div class="retreat-detail-icon">🏝️</div><span id="zn-d3">All accommodation & meals included</span></div>
+          <div class="retreat-detail"><div class="retreat-detail-icon">✈️</div><span id="zn-d4">Flights not included — Dubai departure</span></div>
+        </div>
+        <div class="retreat-price">
+          <div class="retreat-price-label" id="zn-pl">Investment</div>
+          <div class="retreat-price-amt" id="zn-pa">$3,500</div>
+          <div class="retreat-price-note" id="zn-pn">Per person · Early bird available · Payment plans</div>
+        </div>
+        <button class="retreat-btn" onclick="openBook('Zanzibar Retreat')" id="zn-btn">Reserve My Place →</button>
+      </div>
+      <div class="retreat-right">
+        <div class="retreat-feat"><div class="retreat-feat-name" id="rf1n">🌅 Daily Yoga & Movement</div><div class="retreat-feat-desc" id="rf1d">Morning yoga on the beach, breathwork and gentle movement sessions tailored to all levels.</div></div>
+        <div class="retreat-feat"><div class="retreat-feat-name" id="rf2n">🧠 Group Coaching Circles</div><div class="retreat-feat-desc" id="rf2d">Deep-dive coaching sessions where we work through mindset blocks, patterns and goals together.</div></div>
+        <div class="retreat-feat"><div class="retreat-feat-name" id="rf3n">🌊 Ocean Therapy</div><div class="retreat-feat-desc" id="rf3d">Cold exposure, breathwork by the ocean and time in nature as part of the healing process.</div></div>
+        <div class="retreat-feat"><div class="retreat-feat-name" id="rf4n">🍽️ Nourishing Meals</div><div class="retreat-feat-desc" id="rf4d">All meals prepared with fresh, local and clean ingredients. Food as medicine — satisfying and restorative.</div></div>
+        <div class="retreat-feat"><div class="retreat-feat-name" id="rf5n">🤝 Community & Connection</div><div class="retreat-feat-desc" id="rf5d">Join a small group of like-minded women. The friendships formed here often last a lifetime.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="sec-eye reveal"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="ts-eye">Kind Words</div></div>
+  <h2 class="reveal" id="ts-h2">Real women.<br><em>Real results.</em></h2>
+  <div class="testi-grid">
+    <div class="testi-item reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text" id="t1">"Dorothy's Thursday sessions have become the anchor of my week. I come in stressed and leave feeling like myself again."</div>
+      <div class="testi-name" id="tn1">Sarah M. · Dubai</div>
+    </div>
+    <div class="testi-item reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text" id="t2">"The Zanzibar retreat was the best investment I've made in myself. I came home completely transformed — lighter, clearer, more grounded."</div>
+      <div class="testi-name" id="tn2">Nadia K. · Abu Dhabi</div>
+    </div>
+    <div class="testi-item reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text" id="t3">"Working with Dorothy 1:1 changed everything. She has this rare ability to see exactly what you need — and hold you there."</div>
+      <div class="testi-name" id="tn3">Anna L. · Dubai</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- BOOKING FORM -->
+<section id="book">
+  <div class="sec-eye reveal"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="bk-eye">Book Now</div></div>
+  <h2 class="reveal" id="bk-h2">Your journey<br><em>starts here.</em></h2>
+
+  <div id="book-sec" class="reveal">
+    <div class="bform-wrap">
+      <div id="bform-fields">
+        <div class="bform-head">
+          <h3 id="bf-h3">Reserve your place</h3>
+          <p id="bf-sub">Fill in the form and I'll be in touch within 24 hours to confirm your booking.</p>
+          <p class="bform-pkg" id="bf-pkg"></p>
+        </div>
+        <div class="bform-body">
+          <div class="bg"><label id="bl1">What are you booking?</label>
+            <select id="b1">
+              <option value="" disabled selected id="b1o">Select</option>
+              <option>Zanzibar Wellness Retreat</option>
+              <option>Thursday Single Session — AED 150</option>
+              <option>Thursday Monthly Pass — AED 500</option>
+              <option>1:1 Coaching Session</option>
+            </select></div>
+          <div class="bg"><label id="bl2">Your name</label>
+            <input type="text" id="b2" placeholder="Full name"></div>
+          <div class="bg"><label id="bl3">Email</label>
+            <input type="email" id="b3" placeholder="your@email.com"></div>
+          <div class="bg"><label id="bl4">WhatsApp number</label>
+            <input type="tel" id="b4" placeholder="+971 ..."></div>
+          <div class="bg"><label id="bl5">Where are you from?</label>
+            <select id="b5">
+              <option value="" disabled selected>Country</option>
+              <option>UAE / Dubai</option><option>United Kingdom</option>
+              <option>Russia</option><option>Germany</option>
+              <option>France</option><option>Italy</option>
+              <option>Hungary</option><option>China</option><option>Other</option>
+            </select></div>
+          <div class="bg"><label id="bl6">How did you hear about me?</label>
+            <select id="b6">
+              <option value="" disabled selected>Source</option>
+              <option>Instagram</option><option>Friend / referral</option>
+              <option>Thursday event</option><option>Google</option><option>Other</option>
+            </select></div>
+          <div class="bg full"><label id="bl7">Anything you'd like me to know?</label>
+            <textarea id="b7" placeholder="Health goals, questions, special requirements..."></textarea></div>
+        </div>
+        <div class="bform-foot">
+          <p class="bform-note" id="bf-note">I personally review every booking and will reach out within 24 hours. Your details are private and never shared.</p>
+          <button class="bform-sub" onclick="submitBook()" id="bf-btn">Send My Booking →</button>
+        </div>
+      </div>
+      <div id="bform-success">
+        <div class="bs-icon">🌿</div>
+        <h3 id="bs-h">Beautiful — I'll be in touch.</h3>
+        <p id="bs-p">I've received your booking and will reach out within 24 hours to confirm everything personally.</p>
+        <a href="https://wa.me/971585237580" class="wa-btn" style="display:inline-flex;margin-top:8px">💬 <span id="bs-wa">WhatsApp me directly</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-sec">
+  <div class="ct-inner">
+    <div class="ct-left reveal">
+      <div class="sec-eye"><div class="sec-eye-line"></div><div class="sec-eye-txt" id="ct-eye">Get in Touch</div></div>
+      <h2 id="ct-h2">Questions?<br><em>I'd love to hear from you.</em></h2>
+      <p id="ct-p">Whether you're curious about the retreat, the Thursday events or private coaching — send me a message and I'll get back to you personally.</p>
+      <div class="ct-btns">
+        <a href="https://wa.me/971585237580" class="wa-btn">💬 <span id="ct-wa">WhatsApp</span></a>
+        <a href="mailto:zsikaievron@gmail.com" class="em-btn">✉️ <span id="ct-em">Email</span></a>
+      </div>
+    </div>
+    <div class="ct-right reveal">
+      <div id="cf-form">
+        <div class="cf-row">
+          <div class="cf-g"><label id="cfl1">Name</label><input type="text" id="cf-name" placeholder="Your name"></div>
+          <div class="cf-g"><label id="cfl2">Email</label><input type="email" id="cf-email" placeholder="your@email.com"></div>
+        </div>
+        <div class="cf-g"><label id="cfl3">Message</label><textarea id="cf-msg" rows="4" placeholder="Your question or message..."></textarea></div>
+        <div class="cf-btns">
+          <button class="cf-wa" onclick="cfWA()">💬 <span id="cfwt">WhatsApp</span></button>
+          <button class="cf-em" onclick="cfEmail()">✉️ <span id="cfet">Send Email</span></button>
+        </div>
+      </div>
+      <div id="cf-succ">
+        <div style="font-size:28px;margin-bottom:10px">🌿</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text);margin-bottom:6px;font-style:italic" id="cf-sh">Message sent.</div>
+        <div style="color:var(--muted);font-size:13px" id="cf-sp">I'll respond personally within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="ft">© 2026 Dorothy · Wellness & Coaching · Dubai · All rights reserved</footer>
+
+<script>
+const T = {
+en:{dir:'ltr',flag:'🇬🇧',name:'EN',navCta:'Book Now',
+heroEye:'Wellness · Coaching · Dubai',
+heroH1:'Live well.<br>Feel <em>whole.</em><br>Begin today.',
+heroSub:'A sanctuary for women who are ready to transform their health, mindset and energy. Weekly gatherings in Dubai and a life-changing retreat in Zanzibar.',
+btnZanzibar:'Reserve Zanzibar Retreat',btnEvents:'See Thursday Events',
+s1:'200+',sl1:'Women transformed',s2:'Every Thu',sl2:'Live events in Dubai',s3:'Zanzibar',sl3:'Retreat destination',s4:'8',sl4:'Languages',
+abEye:'About Dorothy',abH2:'Wellness is not a<br>destination.<br>It\'s a <em>daily practice.</em>',
+abImgLabel:'Wellness Coach · Dubai',
+abQuote:'"I believe every woman deserves to feel vibrant, clear and deeply at home in her own body."',
+abP1:'Dorothy is a certified wellness and mindset coach based in Dubai. With over a decade of experience guiding women through transformation, she combines evidence-based coaching with holistic wellness practices.',
+abP2:'Her work spans personal coaching sessions, weekly group events every Thursday in Dubai, and immersive retreat experiences — including her signature Zanzibar Wellness Retreat.',
+abCta:'Book a Session',
+svEye:'What I Offer',svH2:'Three ways to<br><em>begin your journey.</em>',
+sv1n:'1:1 Wellness Coaching',sv1d:'Personalised sessions focused on your health, energy and mindset goals. We design a plan that fits your life in Dubai and beyond.',sv1t:'Private · Online or In-person',
+sv2n:'Thursday Group Events',sv2d:'Weekly gatherings for women in Dubai — movement, breathwork, connection and community. Every Thursday. Each session is different.',sv2t:'Weekly · Dubai',
+sv3n:'Zanzibar Wellness Retreat',sv3d:'An immersive multi-day retreat on the coast of Zanzibar. Yoga, coaching, ocean therapy, nourishing food and deep transformation.',sv3t:'Retreat · Zanzibar',
+evEye:'Thursday Events',evH2:'Every Thursday.<br><em>A new experience.</em>',
+evBody:'Each week brings a different theme — movement, breathwork, sound healing, mindset or community. Buy a single pass or a monthly bundle.',
+evBadge:'Every Thursday · Dubai · Limited Spaces',
+ev1Day:'This Thursday',ev1Name:'Morning Breathwork & Reset',
+ev1Desc:'Start your day with conscious breathing, gentle movement and a guided meditation to reset your nervous system and set a powerful intention for the week.',
+ev1Time:'🕖 7:00 AM – 8:30 AM',ev1Loc:'📍 Dubai (location on booking)',ev1Price:'AED 150 / session',ev1Btn:'Reserve My Spot →',
+ev2Day:'Monthly Bundle',ev2Name:'Thursday Pass — 4 Sessions',
+ev2Desc:'Join every Thursday for a month. Each session has a different focus — breathwork, yoga, sound healing, coaching circle or movement. The best way to build a consistent practice.',
+ev2Time:'🗓️ 4 Thursdays / month',ev2Loc:'📍 Dubai · Rotating venues',ev2Price:'AED 500 / month',ev2Btn:'Get Monthly Pass →',
+znEye:'Zanzibar Retreat',znH2:'Seven days.<br><em>One island.</em><br>Total transformation.',
+znBadge:'🌴 Zanzibar · Limited to 12 Women',
+znTitle:'The Zanzibar<br><em>Wellness Retreat</em>',
+znSub:'Seven days on the coast of Zanzibar — yoga at sunrise, coaching circles, ocean therapy, nourishing meals and the space to finally put yourself first.',
+znD1:'Date: Coming soon — register your interest now',znD2:'For women ready for deep change',
+znD3:'All accommodation & meals included',znD4:'Flights not included — Dubai departure',
+znPl:'Investment',znPa:'$3,500',znPn:'Per person · Early bird available · Payment plans',
+znBtn:'Reserve My Place →',
+rf1n:'🌅 Daily Yoga & Movement',rf1d:'Morning yoga on the beach, breathwork and gentle movement sessions tailored to all levels.',
+rf2n:'🧠 Group Coaching Circles',rf2d:'Deep-dive coaching sessions where we work through mindset blocks, patterns and goals together.',
+rf3n:'🌊 Ocean Therapy',rf3d:'Cold exposure, breathwork by the ocean and time in nature as part of the healing process.',
+rf4n:'🍽️ Nourishing Meals',rf4d:'All meals prepared with fresh, local and clean ingredients. Food as medicine — satisfying and restorative.',
+rf5n:'🤝 Community & Connection',rf5d:'Join a small group of like-minded women. The friendships formed here often last a lifetime.',
+tsEye:'Kind Words',tsH2:'Real women.<br><em>Real results.</em>',
+t1:'"Dorothy\'s Thursday sessions have become the anchor of my week. I come in stressed and leave feeling like myself again."',tn1:'Sarah M. · Dubai',
+t2:'"The Zanzibar retreat was the best investment I\'ve made in myself. I came home completely transformed — lighter, clearer, more grounded."',tn2:'Nadia K. · Abu Dhabi',
+t3:'"Working with Dorothy 1:1 changed everything. She has this rare ability to see exactly what you need — and hold you there."',tn3:'Anna L. · Dubai',
+bkEye:'Book Now',bkH2:'Your journey<br><em>starts here.</em>',
+bfH3:'Reserve your place',bfSub:'Fill in the form and I\'ll be in touch within 24 hours to confirm your booking.',
+bl1:'What are you booking?',bl2:'Your name',bl3:'Email',bl4:'WhatsApp number',bl5:'Where are you from?',bl6:'How did you hear about me?',bl7:'Anything you\'d like me to know?',
+bfNote:"I personally review every booking and will reach out within 24 hours. Your details are private and never shared.",bfBtn:'Send My Booking →',
+bsH:'Beautiful — I\'ll be in touch.',bsP:'I\'ve received your booking and will reach out within 24 hours to confirm everything personally.',bsWa:'WhatsApp me directly',
+ctEye:'Get in Touch',ctH2:'Questions?<br><em>I\'d love to hear from you.</em>',
+ctP:"Whether you're curious about the retreat, the Thursday events or private coaching — send me a message and I'll get back to you personally.",
+ctWa:'WhatsApp',ctEm:'Email',
+cfl1:'Name',cfl2:'Email',cfl3:'Message',cfwt:'WhatsApp',cfet:'Send Email',
+cfSH:'Message sent.',cfSP:"I'll respond personally within 24 hours.",
+ft:'© 2026 Dorothy · Wellness & Coaching · Dubai · All rights reserved',
+alert:'Please fill in your name and contact details.',
+cfPh1:'Your name',cfPh2:'your@email.com',cfPh3:'Your question or message...',b2Ph:'Full name',b3Ph:'your@email.com',b4Ph:'+971 ...'},
+
+hu:{dir:'ltr',flag:'🇭🇺',name:'HU',navCta:'Foglalás',
+heroEye:'Wellness · Coaching · Dubai',
+heroH1:'Élj jól.<br>Érezd <em>egésznek magad.</em><br>Kezdj ma.',
+heroSub:'Egy menedék azoknak a nőknek, akik készen állnak egészségük, gondolkodásmódjuk és energiájuk átalakítására. Heti összejövetelek Dubajban és egy életet megváltoztató elvonulás Zanzibáron.',
+btnZanzibar:'Zanzibar Elvonulás foglalása',btnEvents:'Csütörtöki Események',
+s1:'200+',sl1:'Átalakított nő',s2:'Minden csüt.',sl2:'Élő események Dubajban',s3:'Zanzibár',sl3:'Elvonulás helyszín',s4:'8',sl4:'Nyelv',
+abEye:'Dorothy-ról',abH2:'A wellness nem egy<br>cél.<br>Napi <em>gyakorlat.</em>',
+abImgLabel:'Wellness Coach · Dubai',
+abQuote:'"Hiszem, hogy minden nő megérdemli, hogy élénknek, tisztának és otthon érezze magát a saját testében."',
+abP1:'Dorothy tanúsított wellness és mindset coach Dubajban. Több mint egy évtizedes tapasztalatával a nők átalakulásának kísérésében bizonyítékalapú coachingot ötvöz holisztikus wellness gyakorlatokkal.',
+abP2:'Munkája személyes coaching üléseket, heti csoportos eseményeket minden csütörtökön Dubajban, és elmélyült elvonulásokat foglal magában — beleértve a zanzibári Wellness Elvonulást.',
+abCta:'Ülés foglalása',
+svEye:'Mit kínálok',svH2:'Három út az<br><em>utazásod megkezdéséhez.</em>',
+sv1n:'1:1 Wellness Coaching',sv1d:'Személyre szabott ülések az egészséged, energiád és gondolkodásmódod céljaira fókuszálva.',sv1t:'Privát · Online vagy személyesen',
+sv2n:'Csütörtöki Csoportos Események',sv2d:'Heti összejövetelek dubaji nőknek — mozgás, légzőgyakorlat, kapcsolat és közösség. Minden csütörtökön.',sv2t:'Heti · Dubai',
+sv3n:'Zanzibári Wellness Elvonulás',sv3d:'Egy elmélyült többnapos elvonulás Zanzibár partjainál. Jóga, coaching, óceánterápia és mély átalakulás.',sv3t:'Elvonulás · Zanzibár',
+evEye:'Csütörtöki Események',evH2:'Minden csütörtökön.<br><em>Egy új élmény.</em>',
+evBody:'Minden héten más téma — mozgás, légzőgyakorlat, hanggyógyítás, mindset vagy közösség. Vegyél egyszeri belépőt vagy havi bérletet.',
+evBadge:'Minden csütörtökön · Dubai · Korlátozott helyek',
+ev1Day:'Ezen a csütörtökön',ev1Name:'Reggeli Légzőgyakorlat & Reset',
+ev1Desc:'Kezdd a napod tudatos légzéssel, gyengéd mozgással és irányított meditációval az idegrendszered helyreállításához és erős szándék meghatározásához.',
+ev1Time:'🕖 7:00 – 8:30',ev1Loc:'📍 Dubai (helyszín foglalásnál)',ev1Price:'AED 150 / ülés',ev1Btn:'Helyfoglalás →',
+ev2Day:'Havi Bérlet',ev2Name:'Csütörtöki Bérlet — 4 ülés',
+ev2Desc:'Csatlakozz minden csütörtökön egy hónapon át. Minden ülésnek más a fókusza. A legjobb módja a következetes gyakorlat kialakítására.',
+ev2Time:'🗓️ 4 csütörtök / hónap',ev2Loc:'📍 Dubai · Váltakozó helyszínek',ev2Price:'AED 500 / hónap',ev2Btn:'Havi Bérlet →',
+znEye:'Zanzibári Elvonulás',znH2:'Hét nap.<br><em>Egy sziget.</em><br>Teljes átalakulás.',
+znBadge:'🌴 Zanzibár · Maximum 12 nő',
+znTitle:'A Zanzibári<br><em>Wellness Elvonulás</em>',
+znSub:'Hét nap Zanzibár partjainál — hajnali jóga, coaching körök, óceánterápia, tápláló ételek és a tér, hogy végre magadra összpontosíts.',
+znD1:'Időpont: Hamarosan — regisztrálj most az érdeklődők listájára',znD2:'Mély változásra kész nőknek',
+znD3:'Szállás és étkezés benne van az árban',znD4:'Repülőjegy nem benne — dubaji indulás',
+znPl:'Befektetés',znPa:'$3,500',znPn:'Személyenként · Korai regisztráció elérhető · Részletfizetés',
+znBtn:'Foglalás →',
+rf1n:'🌅 Napi Jóga & Mozgás',rf1d:'Reggeli jóga a tengerparton, légzőgyakorlat és gyengéd mozgásülések minden szintnek.',
+rf2n:'🧠 Csoportos Coaching Körök',rf2d:'Mélyreható coaching ülések ahol együtt dolgozzuk fel a mentális blokkokat és célokat.',
+rf3n:'🌊 Óceánterápia',rf3d:'Hideg expozíció, légzőgyakorlat az óceánnál és természetben töltött idő a gyógyulás részeként.',
+rf4n:'🍽️ Tápláló Étkezések',rf4d:'Minden ételt friss, helyi és tiszta összetevőkkel készítenek. Étel mint gyógyszer.',
+rf5n:'🤝 Közösség & Kapcsolat',rf5d:'Csatlakozz hasonló gondolkodású nők kis csoportjához. Az itt kötött barátságok gyakran életre szólnak.',
+tsEye:'Visszajelzések',tsH2:'Valódi nők.<br><em>Valódi eredmények.</em>',
+t1:'"Dorothy csütörtöki ülései a hitem horgonyává váltak. Stresszes vagyok amikor megérkezek és magamnak érzem magam amikor elmegyek."',tn1:'Sarah M. · Dubai',
+t2:'"A zanzibári elvonulás volt a legjobb befektetés amit magamba tettem. Teljesen átalakulva jöttem haza — könnyebben, tisztábban."',tn2:'Nadia K. · Abu Dhabi',
+t3:'"Dorothy-val való 1:1 munka mindent megváltoztatott. Ritka képessége van hogy pontosan lássa amire szükséged van."',tn3:'Anna L. · Dubai',
+bkEye:'Foglalás',bkH2:'Az utazásod<br><em>itt kezdődik.</em>',
+bfH3:'Foglalj helyet',bfSub:'Töltsd ki az űrlapot és 24 órán belül felveszem veled a kapcsolatot a foglalás megerősítéséhez.',
+bl1:'Mit foglalsz?',bl2:'Neved',bl3:'Email',bl4:'WhatsApp szám',bl5:'Honnan jössz?',bl6:'Hogyan hallottál rólam?',bl7:'Van valami amit szeretnél tudni velem?',
+bfNote:'Személyesen tekintem át minden foglalást és 24 órán belül felveszem veled a kapcsolatot.',bfBtn:'Foglalás küldése →',
+bsH:'Gyönyörű — hamarosan jelentkezem.',bsP:'Megkaptam a foglalásodat és 24 órán belül felveszem veled a kapcsolatot.',bsWa:'WhatsApp közvetlen',
+ctEye:'Kapcsolat',ctH2:'Kérdéseid vannak?<br><em>Szívesen hallak.</em>',
+ctP:'Legyen szó az elvonulásról, a csütörtöki eseményekről vagy privát coachingról — küldj üzenetet és személyesen válaszolok.',
+ctWa:'WhatsApp',ctEm:'Email',
+cfl1:'Név',cfl2:'Email',cfl3:'Üzenet',cfwt:'WhatsApp',cfet:'Email küldés',
+cfSH:'Elküldve.',cfSP:'24 órán belül személyesen válaszolok.',
+ft:'© 2026 Dorothy · Wellness & Coaching · Dubai · Minden jog fenntartva',
+alert:'Kérlek add meg a neved és elérhetőségedet.',
+cfPh1:'A neved',cfPh2:'email@cimed.hu',cfPh3:'Kérdés vagy üzenet...',b2Ph:'Teljes név',b3Ph:'email@cimed.hu',b4Ph:'+36 ...'},
+
+ar:{dir:'rtl',flag:'🇦🇪',name:'AR',navCta:'احجز الآن',
+heroEye:'ويلنس · تدريب · دبي',
+heroH1:'عيشي بصحة.<br>اشعري <em>بالاكتمال.</em><br>ابدئي اليوم.',
+heroSub:'ملاذ للنساء المستعدات لتحويل صحتهن وعقليتهن وطاقتهن. تجمعات أسبوعية في دبي وخلوة تغير الحياة في زنجبار.',
+btnZanzibar:'احجزي خلوة زنجبار',btnEvents:'أحداث الخميس',
+s1:'+200',sl1:'سيدة تحولت',s2:'كل خميس',sl2:'أحداث مباشرة في دبي',s3:'زنجبار',sl3:'وجهة الخلوة',s4:'8',sl4:'لغات',
+abEye:'عن دوروثي',abH2:'الرفاهية ليست<br>وجهة.<br>إنها <em>ممارسة يومية.</em>',
+abImgLabel:'مدربة ويلنس · دبي',
+abQuote:'"أؤمن أن كل امرأة تستحق أن تشعر بالحيوية والوضوح والراحة في جسدها."',
+abP1:'دوروثي مدربة ويلنس وعقلية معتمدة مقيمة في دبي. مع أكثر من عقد من الخبرة في توجيه النساء خلال التحول، تجمع بين التدريب القائم على الأدلة وممارسات الرفاهية الشاملة.',
+abP2:'يشمل عملها جلسات التدريب الشخصي والأحداث الجماعية الأسبوعية كل خميس في دبي وتجارب الخلوة المكثفة.',
+abCta:'احجزي جلسة',
+svEye:'ما أقدمه',svH2:'ثلاث طرق<br><em>لبدء رحلتك.</em>',
+sv1n:'تدريب ويلنس 1:1',sv1d:'جلسات شخصية تركز على أهداف صحتك وطاقتك وعقليتك.',sv1t:'خاص · أونلاين أو شخصي',
+sv2n:'أحداث المجموعة يوم الخميس',sv2d:'تجمعات أسبوعية للنساء في دبي — حركة وتنفس وتواصل ومجتمع. كل خميس.',sv2t:'أسبوعي · دبي',
+sv3n:'خلوة ويلنس في زنجبار',sv3d:'خلوة مكثفة متعددة الأيام على ساحل زنجبار. يوغا وتدريب وعلاج المحيط وتحول عميق.',sv3t:'خلوة · زنجبار',
+evEye:'أحداث الخميس',evH2:'كل خميس.<br><em>تجربة جديدة.</em>',
+evBody:'كل أسبوع يحمل موضوعاً مختلفاً — حركة وتنفس وعلاج بالصوت وعقلية أو مجتمع. اشتري تصريحاً واحداً أو باقة شهرية.',
+evBadge:'كل خميس · دبي · أماكن محدودة',
+ev1Day:'هذا الخميس',ev1Name:'تنفس صباحي وإعادة ضبط',
+ev1Desc:'ابدئي يومك بالتنفس الواعي والحركة اللطيفة والتأمل الموجه لإعادة ضبط جهازك العصبي وتحديد نية قوية للأسبوع.',
+ev1Time:'🕖 7:00 – 8:30 صباحاً',ev1Loc:'📍 دبي (الموقع عند الحجز)',ev1Price:'150 درهم / جلسة',ev1Btn:'احجزي مكانك →',
+ev2Day:'باقة شهرية',ev2Name:'تصريح الخميس — 4 جلسات',
+ev2Desc:'انضمي كل خميس لمدة شهر. لكل جلسة تركيز مختلف — تنفس أو يوغا أو علاج بالصوت أو دائرة تدريب.',
+ev2Time:'🗓️ 4 أخميسة / شهر',ev2Loc:'📍 دبي · أماكن متناوبة',ev2Price:'500 درهم / شهر',ev2Btn:'احصلي على الباقة الشهرية →',
+znEye:'خلوة زنجبار',znH2:'سبعة أيام.<br><em>جزيرة واحدة.</em><br>تحول كامل.',
+znBadge:'🌴 زنجبار · محدود لـ 12 امرأة',
+znTitle:'خلوة ويلنس<br><em>في زنجبار</em>',
+znSub:'سبعة أيام على ساحل زنجبار — يوغا عند الشروق ودوائر تدريب وعلاج بالمحيط ووجبات مغذية والمساحة لتضعي نفسك أولاً أخيراً.',
+znD1:'التاريخ: قريباً — سجلي اهتمامك الآن',znD2:'للنساء المستعدات للتغيير العميق',
+znD3:'الإقامة والوجبات مشمولة في السعر',znD4:'التذاكر غير مشمولة — المغادرة من دبي',
+znPl:'الاستثمار',znPa:'3,500$',znPn:'للشخص الواحد · العرض المبكر متاح · خطط الدفع',
+znBtn:'احجزي مكانك →',
+rf1n:'🌅 يوغا وحركة يومية',rf1d:'يوغا صباحية على الشاطئ وتنفس وجلسات حركة لطيفة لجميع المستويات.',
+rf2n:'🧠 دوائر تدريب جماعي',rf2d:'جلسات تدريب متعمقة نعمل فيها على العقبات الذهنية والأنماط والأهداف معاً.',
+rf3n:'🌊 علاج المحيط',rf3d:'التعرض للبرد والتنفس بجانب المحيط والوقت في الطبيعة كجزء من عملية الشفاء.',
+rf4n:'🍽️ وجبات مغذية',rf4d:'جميع الوجبات تُحضَّر بمكونات طازجة ومحلية ونظيفة. الطعام كدواء.',
+rf5n:'🤝 مجتمع وتواصل',rf5d:'انضمي لمجموعة صغيرة من النساء المتشابهات في التفكير. الصداقات التي تتشكل هنا غالباً تدوم مدى الحياة.',
+tsEye:'كلمات طيبة',tsH2:'نساء حقيقيات.<br><em>نتائج حقيقية.</em>',
+t1:'"أصبحت جلسات دوروثي الخميسية مرساة أسبوعي. أصل وأنا مجهدة وأغادر وأنا أشعر بنفسي مجدداً."',tn1:'سارة م. · دبي',
+t2:'"كانت خلوة زنجبار أفضل استثمار قمت به في نفسي. عدت وقد تحولت كلياً — أخف وأوضح وأكثر استقراراً."',tn2:'ناديا ك. · أبوظبي',
+t3:'"العمل مع دوروثي 1:1 غيّر كل شيء. لديها هذه القدرة النادرة لرؤية ما تحتاجينه تماماً."',tn3:'آنا ل. · دبي',
+bkEye:'احجزي الآن',bkH2:'رحلتك<br><em>تبدأ هنا.</em>',
+bfH3:'احجزي مكانك',bfSub:'املئي النموذج وسأتواصل معك خلال 24 ساعة لتأكيد حجزك.',
+bl1:'ماذا تحجزين؟',bl2:'اسمك',bl3:'البريد الإلكتروني',bl4:'رقم واتساب',bl5:'من أين أنت؟',bl6:'كيف سمعت عني؟',bl7:'هل هناك شيء تودين إخباري به؟',
+bfNote:'أراجع كل حجز شخصياً وسأتواصل معك خلال 24 ساعة.',bfBtn:'إرسال حجزي →',
+bsH:'جميل — سأتواصل معك قريباً.',bsP:'استلمت حجزك وسأتواصل معك خلال 24 ساعة لتأكيد كل شيء شخصياً.',bsWa:'واتساب مباشرة',
+ctEye:'تواصلي معي',ctH2:'أسئلة؟<br><em>يسعدني سماعك.</em>',
+ctP:'سواء كنت فضولية حول الخلوة أو أحداث الخميس أو التدريب الخاص — أرسلي رسالة وسأرد شخصياً.',
+ctWa:'واتساب',ctEm:'البريد الإلكتروني',
+cfl1:'الاسم',cfl2:'البريد الإلكتروني',cfl3:'الرسالة',cfwt:'واتساب',cfet:'إرسال بريد',
+cfSH:'تم الإرسال.',cfSP:'سأرد شخصياً خلال 24 ساعة.',
+ft:'© 2026 Dorothy · Wellness & Coaching · Dubai · جميع الحقوق محفوظة',
+alert:'يرجى إدخال اسمك وبيانات الاتصال.',
+cfPh1:'اسمك',cfPh2:'بريدك@email.com',cfPh3:'سؤالك أو رسالتك...',b2Ph:'الاسم الكامل',b3Ph:'بريدك@email.com',b4Ph:'+971 ...'},
+
+de:{dir:'ltr',flag:'🇩🇪',name:'DE'},
+fr:{dir:'ltr',flag:'🇫🇷',name:'FR'},
+it:{dir:'ltr',flag:'🇮🇹',name:'IT'},
+ru:{dir:'ltr',flag:'🇷🇺',name:'RU'},
+zh:{dir:'ltr',flag:'🇨🇳',name:'ZH'}
+};
+// Fill remaining with EN fallback
+['de','fr','it','ru','zh'].forEach(c=>{Object.assign(T[c],T.en);T[c].flag={de:'🇩🇪',fr:'🇫🇷',it:'🇮🇹',ru:'🇷🇺',zh:'🇨🇳'}[c];T[c].name=c.toUpperCase();T[c].dir='ltr';});
+
+let lang='en', selPkg='', bookOpen=false;
+
+function setLang(code){
+  lang=code;
+  const t=T[code];
+  document.documentElement.setAttribute('dir',t.dir);
+  document.documentElement.setAttribute('lang',code);
+  const s=(id,v,h)=>{const e=document.getElementById(id);if(e){if(h)e.innerHTML=v;else e.textContent=v;}};
+  document.getElementById('cur-flag').textContent=t.flag;
+  document.getElementById('cur-lang').textContent=t.name;
+  document.querySelectorAll('.lang-opt').forEach(o=>o.classList.toggle('active',o.textContent.trim().includes(t.name)));
+  s('nav-cta',t.navCta);
+  s('hero-eye',t.heroEye);s('hero-h1',t.heroH1,true);s('hero-sub',t.heroSub);
+  s('btn-zanzibar',t.btnZanzibar);s('btn-events',t.btnEvents);
+  s('s1',t.s1);s('sl1',t.sl1);s('s2',t.s2);s('sl2',t.sl2);s('s3',t.s3);s('sl3',t.sl3);s('s4',t.s4);s('sl4',t.sl4);
+  s('ab-eye',t.abEye);s('ab-h2',t.abH2,true);s('ab-img-label',t.abImgLabel);
+  s('ab-quote',t.abQuote);s('ab-p1',t.abP1);s('ab-p2',t.abP2);s('ab-cta',t.abCta);
+  s('sv-eye',t.svEye);s('sv-h2',t.svH2,true);
+  s('sv1n',t.sv1n);s('sv1d',t.sv1d);s('sv1t',t.sv1t);
+  s('sv2n',t.sv2n);s('sv2d',t.sv2d);s('sv2t',t.sv2t);
+  s('sv3n',t.sv3n);s('sv3d',t.sv3d);s('sv3t',t.sv3t);
+  s('ev-eye',t.evEye);s('ev-h2',t.evH2,true);s('ev-body',t.evBody);s('ev-badge',t.evBadge);
+  s('ev1-day',t.ev1Day);s('ev1-name',t.ev1Name);s('ev1-desc',t.ev1Desc);
+  s('ev1-time',t.ev1Time);s('ev1-loc',t.ev1Loc);s('ev1-price',t.ev1Price);s('ev1-btn',t.ev1Btn);
+  s('ev2-day',t.ev2Day);s('ev2-name',t.ev2Name);s('ev2-desc',t.ev2Desc);
+  s('ev2-time',t.ev2Time);s('ev2-loc',t.ev2Loc);s('ev2-price',t.ev2Price);s('ev2-btn',t.ev2Btn);
+  s('zn-eye',t.znEye);s('zn-h2',t.znH2,true);s('zn-badge',t.znBadge);
+  s('zn-title',t.znTitle,true);s('zn-sub',t.znSub);
+  s('zn-d1',t.znD1);s('zn-d2',t.znD2);s('zn-d3',t.znD3);s('zn-d4',t.znD4);
+  s('zn-pl',t.znPl);s('zn-pa',t.znPa);s('zn-pn',t.znPn);s('zn-btn',t.znBtn);
+  for(let i=1;i<=5;i++){s('rf'+i+'n',t['rf'+i+'n']);s('rf'+i+'d',t['rf'+i+'d']);}
+  s('ts-eye',t.tsEye);s('ts-h2',t.tsH2,true);
+  s('t1',t.t1);s('tn1',t.tn1);s('t2',t.t2);s('tn2',t.tn2);s('t3',t.t3);s('tn3',t.tn3);
+  s('bk-eye',t.bkEye);s('bk-h2',t.bkH2,true);
+  s('bf-h3',t.bfH3);s('bf-sub',t.bfSub);
+  for(let i=1;i<=7;i++) s('bl'+i,t['bl'+i]);
+  s('bf-note',t.bfNote);s('bf-btn',t.bfBtn);
+  s('bs-h',t.bsH);s('bs-p',t.bsP);s('bs-wa',t.bsWa);
+  s('ct-eye',t.ctEye);s('ct-h2',t.ctH2,true);s('ct-p',t.ctP);
+  s('ct-wa',t.ctWa);s('ct-em',t.ctEm);
+  s('cfl1',t.cfl1);s('cfl2',t.cfl2);s('cfl3',t.cfl3);
+  s('cfwt',t.cfwt);s('cfet',t.cfet);
+  s('cf-sh',t.cfSH);s('cf-sp',t.cfSP);s('ft',t.ft);
+  const cn=document.getElementById('cf-name');if(cn)cn.placeholder=t.cfPh1;
+  const ce=document.getElementById('cf-email');if(ce)ce.placeholder=t.cfPh2;
+  const cm=document.getElementById('cf-msg');if(cm)cm.placeholder=t.cfPh3;
+  const b2=document.getElementById('b2');if(b2)b2.placeholder=t.b2Ph;
+  const b3=document.getElementById('b3');if(b3)b3.placeholder=t.b3Ph;
+  const b4=document.getElementById('b4');if(b4)b4.placeholder=t.b4Ph;
+  closeLang();
+}
+
+function toggleLang(){
+  document.getElementById('lang-btn').classList.toggle('open');
+  document.getElementById('lang-dd').classList.toggle('open');
+}
+function closeLang(){
+  document.getElementById('lang-btn').classList.remove('open');
+  document.getElementById('lang-dd').classList.remove('open');
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.lang-wrap'))closeLang();});
+
+function openBook(pkg){
+  selPkg=pkg;
+  const sec=document.getElementById('book-sec');
+  const lbl=document.getElementById('bf-pkg');
+  if(lbl) lbl.textContent='→ '+pkg;
+  sec.classList.add('open');
+  setTimeout(()=>document.getElementById('book').scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+function submitBook(){
+  const t=T[lang];
+  const n=document.getElementById('b2')?.value.trim();
+  const e=document.getElementById('b3')?.value.trim();
+  if(!n||!e){alert(t.alert);return;}
+  const v=id=>document.getElementById(id)?.value||'';
+  const msg=encodeURIComponent(`Hi Dorothy!\n\nNew Booking:\nPackage: ${selPkg}\nName: ${n}\nEmail: ${e}\nWhatsApp: ${v('b4')}\nFrom: ${v('b5')}\nSource: ${v('b6')}\nNotes: ${v('b7')||'—'}`);
+  document.getElementById('bform-fields').style.display='none';
+  document.getElementById('bform-success').classList.add('show');
+  setTimeout(()=>window.open(`https://wa.me/971585237580?text=${msg}`,'_blank'),1200);
+}
+
+function cfWA(){
+  const n=document.getElementById('cf-name')?.value.trim();
+  const e=document.getElementById('cf-email')?.value.trim();
+  const m=document.getElementById('cf-msg')?.value.trim();
+  if(!n||!e){alert(T[lang].alert);return;}
+  const msg=encodeURIComponent(`Hi Dorothy!\nName: ${n}\nEmail: ${e}\nMessage: ${m||'—'}`);
+  showCfSucc();
+  setTimeout(()=>window.open(`https://wa.me/971585237580?text=${msg}`,'_blank'),800);
+}
+function cfEmail(){
+  const n=document.getElementById('cf-name')?.value.trim();
+  const e=document.getElementById('cf-email')?.value.trim();
+  const m=document.getElementById('cf-msg')?.value.trim();
+  if(!n||!e){alert(T[lang].alert);return;}
+  const sub=encodeURIComponent(`Dorothy Wellness Inquiry — ${n}`);
+  const body=encodeURIComponent(`Name: ${n}\nEmail: ${e}\n\nMessage:\n${m||'—'}`);
+  showCfSucc();
+  setTimeout(()=>window.open(`mailto:zsikaievron@gmail.com?subject=${sub}&body=${body}`,'_blank'),800);
+}
+function showCfSucc(){
+  document.getElementById('cf-form').style.display='none';
+  document.getElementById('cf-succ').classList.add('show');
+}
+
+// Auto-open booking if anchor
+if(window.location.hash==='#book') setTimeout(()=>openBook('General Enquiry'),500);
+
+const obs=new IntersectionObserver(e=>{
+  e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);}});
+},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
